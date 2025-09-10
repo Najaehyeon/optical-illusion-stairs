@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+                max-width: 800px;
+                margin: auto;
+            }
+            .frame {
+                display: flex;
+                width: 710px;
+                margin-top: 100px;
+            }
+            .background_1 {
+                position: absolute;
+                margin-top: 204px;
+                width: 406px;
+                height: 406px;
+                border-bottom: 2px solid black;
+                border-left: 2px solid black;
+                line-height: 500px;
+                
+            }
+            .step_horizontal {
+                width: 100px;
+                height: 200px;
+                border: 2px solid black;
+                transform: skewX(-45deg);
+            }
+            .step_vertical {
+                width: 200px;
+                height: 100px;
+                border: 2px solid black;
+                transform: skewY(-45deg);
+            }
+            #horizontal_first {
+                margin-left: 100px;
+            }
+            #horizontal_second {
+                margin: 102px 0 0 -102px;
+            }
+            #horizontal_third {
+                margin: 204px 0 0 -103px
+            }
+            #horizontal_fourth {
+                margin: 306px 0 0 -102px;
+            }
+            #horizontal_fifth {
+                margin: 408px 0 0 -102px;
+            }
+            #vertical_first {
+                margin: 101px 0 0 -103px;
+            }
+            #vertical_second {
+                margin: 204px 0 0 -104px;
+            }
+            #vertical_third {
+                margin: 306px 0 0 -103px;
+            }
+            #vertical_fourth {
+                margin: 408px 0 0 -104px;
+            }
+            .background_2 {
+                margin-left: -308px;
+                width: 406px;
+                height: 406px;
+                border-top: 2px solid black;
+                border-right: 2px solid black;
+                text-align: center;
+                line-height: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="frame">
+            <div class="background_1"><h1>&emsp;&emsp;&emsp;A</h1></div>
+            <div class="step_horizontal" id="horizontal_first"></div>
+            <div class="step_vertical" id="vertical_first"></div>
+            <div class="step_horizontal" id="horizontal_second"></div>
+            <div class="step_vertical" id="vertical_second"></div>
+            <div class="step_horizontal" id="horizontal_third"></div>
+            <div class="step_vertical" id="vertical_third"></div>
+            <div class="step_horizontal" id="horizontal_fourth"></div>
+            <div class="step_vertical" id="vertical_fourth"></div>
+            <div class="step_horizontal" id="horizontal_fifth"></div>
+            <div class="background_2"><h1>&emsp;&emsp;&emsp;B</h1></div>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+            const frame = document.querySelector(".frame");
+            let rotation = 0;
+            let rotationSpeed = 1;
+            let rotationInterval;
+
+            function startRotation() {
+                rotationInterval = setInterval(rotateFrame, 16);
+            }
+
+            function rotateFrame() {
+                rotation += rotationSpeed;
+                frame.style.transform = `rotate(${rotation}deg)`;
+
+                // 180도 회전마다 정지
+                if (rotation % 180 === 0) {
+                clearInterval(rotationInterval); // 정지
+                setTimeout(() => {
+                    startRotation(); // 2초 후 다시 회전
+                }, 2000);
+                }
+            }
+
+            // 페이지 로드 후 3초 후 회전 시작
+            setTimeout(() => {
+                    startRotation();
+                }, 3000);
+            });
+        </script>
+    </body>
+</html>
